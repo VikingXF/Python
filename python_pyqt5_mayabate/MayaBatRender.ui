@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>691</width>
+    <height>394</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QGroupBox" name="groupBox">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>671</width>
+     <height>381</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Arial</family>
+     <weight>50</weight>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="title">
+    <string>Maya批渲染设置</string>
+   </property>
+   <widget class="QPushButton" name="pushButton">
+    <property name="geometry">
+     <rect>
+      <x>520</x>
+      <y>30</y>
+      <width>141</width>
+      <height>91</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>运行</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>30</y>
+      <width>111</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;MayaRender地址：&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>60</y>
+      <width>111</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Maya项目工程位置：</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="toolButton">
+    <property name="geometry">
+     <rect>
+      <x>470</x>
+      <y>30</y>
+      <width>37</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>...</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="toolButton_2">
+    <property name="geometry">
+     <rect>
+      <x>470</x>
+      <y>60</y>
+      <width>37</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>...</string>
+    </property>
+   </widget>
+   <widget class="QTableWidget" name="tableWidget">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>130</y>
+      <width>641</width>
+      <height>241</height>
+     </rect>
+    </property>
+    <property name="locale">
+     <locale language="Chinese" country="China"/>
+    </property>
+    <row>
+     <property name="text">
+      <string>1</string>
+     </property>
+    </row>
+    <column>
+     <property name="text">
+      <string>渲染摄像机</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>渲染模式</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>渲染起始帧</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>渲染结束帧</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>渲染保存位置</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>渲染文件</string>
+     </property>
+    </column>
+    <item row="0" column="0">
+     <property name="text">
+      <string>baby_001</string>
+     </property>
+    </item>
+    <item row="0" column="1">
+     <property name="text">
+      <string>sw</string>
+     </property>
+    </item>
+    <item row="0" column="2">
+     <property name="text">
+      <string>101</string>
+     </property>
+    </item>
+    <item row="0" column="3">
+     <property name="text">
+      <string>250</string>
+     </property>
+    </item>
+    <item row="0" column="4">
+     <property name="text">
+      <string>Z:\BBBS\images\baby_001</string>
+     </property>
+    </item>
+    <item row="0" column="5">
+     <property name="text">
+      <string>task\baby_001(101-250).mb</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QPushButton" name="pushButton_2">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>100</y>
+      <width>71</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>添加</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_3">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>100</y>
+      <width>71</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>删除</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_4">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>100</y>
+      <width>91</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>保存数据</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit">
+    <property name="geometry">
+     <rect>
+      <x>130</x>
+      <y>30</y>
+      <width>331</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>&quot;C:\Program Files\Autodesk\Maya2016\bin\Render.exe&quot;</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_2">
+    <property name="geometry">
+     <rect>
+      <x>130</x>
+      <y>60</y>
+      <width>331</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Z:\BBBS</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_5">
+    <property name="geometry">
+     <rect>
+      <x>280</x>
+      <y>100</y>
+      <width>91</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>读取数据</string>
+    </property>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

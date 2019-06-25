@@ -1,0 +1,137 @@
+import sys
+
+
+import MayaBatRender
+from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import QApplication,QMainWindow,QFileDialog,QTableWidget,QTableWidgetItem
+from common import utils
+from .addDataThread import addTableDataThread
+
+class MainCode(QMainWindow, MayaBatRender.Ui_Form):
+    def __init__(self):
+        QMainWindow.__init__(self)
+        MayaBatRender.Ui_Form.__init__(self)
+        self.setupUi(self)
+        self.pushButton_4.clicked.connect(self.on_save)
+        self.pushButton_5.clicked.connect(self.on_open)
+        self.toolButton.clicked.connect(self.on_LoadFile1)
+        self.toolButton_2.clicked.connect(self.on_LoadFile2)
+        self.pushButton_2.clicked.connect(self.on_add)
+        self.pushButton_3.clicked.connect(self.on_delete)
+        self.pushButton.clicked.connect(self.on_run)
+
+    def on_LoadFile1(self):
+        renderfile_name = QFileDialog.getOpenFileName(self, "open file dialog", "C:", "Txt files(*.exe)")
+        renderfile_name2 = renderfile_name[0].replace('/', '\\')
+        self.lineEdit.setText("\""+renderfile_name2+"\"")
+
+    def on_LoadFile2(self):
+        dir_path = QFileDialog.getExistingDirectory(self, "choose directory", "C:")
+        dir_path2 = dir_path.replace('/', '\\')
+        self.lineEdit_2.setText(dir_path2)
+
+    def on_add(self):
+        print("add")
+        rowcount = self.tableWidget.rowCount()
+        print(rowcount)
+        self.tableWidget.setRowCount(rowcount+1)
+
+
+    def on_delete(self):
+        print("delete")
+        row_select = self.tableWidget.selectedItems()
+        if len(row_select) == 0:
+            return
+        print(len(row_select))
+        for row_select_child in row_select:
+            id = row_select_child.text()
+            print("id: {}".format(id))
+            row = row_select_child.row()
+            self.tableWidget.removeRow(row)
+
+    def on_save(self):
+        print ("on_save")
+        filesave = QFileDialog.getSaveFileName(self, '文件另存为', 'C:', 'TXT (*.txt)')
+        rows = self.tableWidget.rowCount()
+        set_text = ""
+        with open(filesave[0], 'w') as f:
+            for i in range(0,rows):
+                for j in range(0,6):
+                    set_text += (str(self.tableWidget.item(i, j).text()) + " ")
+                #set_text +="\n"
+            f.write(set_text)
+            print(set_text)
+
+    def on_open(self):
+        print("on_open")
+        txtstr = ""
+        listitem = []
+        FullFileName, _ = QFileDialog.getOpenFileName(self, '打开', r'./', 'TXT (*.txt)')
+        with open(FullFileName, 'rt') as f:
+            lines = f.readlines()
+            for line in lines:
+                txtstr = txtstr + line
+            print("txtstr : "+ txtstr)
+            listitem = txtstr.split(" ")
+            print(type(listitem))
+        print(listitem[7])
+            #print("listitem : "+listitem)
+        widgetrowCount = (len(listitem))//6
+        tableWidget = QTableWidget(self)
+        tableWidget.setRowCount(3)
+        tableWidget.setColumnCount(6)
+        for i in range(0, widgetrowCount):
+            for j in range(0,6):
+                newItem = QTableWidgetItem(listitem[i*6+j])
+                tableWidget.setItem(i, j, newItem)
+
+        def set_item(self, data_dict):
+            """
+            向表格填值
+            """
+            row = data_dict.get('row', self.tableWidget.rowCount())  # self.tableWidget.rowCount()
+            col = 0
+            diff = data_dict.get('diff')
+            computer_pr = data_dict.get('computer')
+            end_pr = data_dict.get('end_pr')
+            key_list = list(data_dict)
+            table = self.tableWidget
+            # table.setRowCount(row + 1)
+            for key in utils.get_key_list():
+                table.setItem(int(row), col, QtWidgets.QTableWidgetItem(str(data_dict[key_list[col]])))
+                if key == 'diff' and diff:
+                    table.item(int(row), col).setForeground(QBrush(QColor(255, 0, 0)))
+                elif key == 'end_pr' and computer_pr != end_pr:
+                    table.item(int(row), col).setForeground(QBrush(QColor(255, 0, 0)))
+
+                col = col + 1
+
+    def on_run(self):
+        print("run")
+        filename = QFileDialog.getSaveFileName(self, '文件另存为', 'C:', 'BAT (*.bat)')
+        widgetrowCount = self.tableWidget.rowCount()
+        with open(filename[0], 'w') as f:
+            for i in range(0, widgetrowCount):
+                set_rendertext = self.lineEdit.text()
+                set_projtext = " " + "-proj" + " " + self.lineEdit_2.text()
+                set_camtext = " " + "-cam" + " " + self.tableWidget.item(i, 0).text()
+                set_rtext = " " + "-r" + " " + self.tableWidget.item(i, 1).text()
+                set_starttext = " " + "-s" + " " + self.tableWidget.item(i, 2).text()
+                set_endtext = " " + "-e" + " " + self.tableWidget.item(i, 3).text()
+                set_savetext = " " + "-rd" + " " + self.tableWidget.item(i, 4).text()
+                set_filetext = " " + self.tableWidget.item(i, 5).text() + "\n"
+                set_text = set_rendertext + set_projtext + set_camtext + set_rtext + set_starttext + set_endtext + set_savetext + set_filetext
+                f.write(set_text)
+
+if __name__=="__main__":
+
+    app=QtWidgets.QApplication(sys.argv)
+    md = MainCode();
+    md.show();
+
+    #widget=QtWidgets.QWidget()
+    #ui=MayaBatRender.Ui_Form()
+    #ui.setupUi(widget)
+    #widget.setWindowIcon(QIcon('web.png')) #增加icon图标，如果没有图片可以没有这句
+    #widget.show()
+    sys.exit(app.exec_())
