@@ -89,7 +89,7 @@ class MainCode(QMainWindow, MayaBatRender.Ui_Form):
             for j in range(0,6):
                 newItem = QTableWidgetItem(listitem[i*6+j])
                 tableWidget.setItem(i, j, newItem)
-
+################################################
         def set_item(self, data_dict):
             """
             向表格填值
