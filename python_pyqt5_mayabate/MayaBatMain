@@ -20,23 +20,26 @@ class MainCode(QMainWindow, MayaBatRender.Ui_Form):
         self.pushButton_3.clicked.connect(self.on_delete)
         self.pushButton.clicked.connect(self.on_run)
 
+    # 按钮选择目录
     def on_LoadFile1(self):
         renderfile_name = QFileDialog.getOpenFileName(self, "open file dialog", "C:", "Txt files(*.exe)")
         renderfile_name2 = renderfile_name[0].replace('/', '\\')
         self.lineEdit.setText("\""+renderfile_name2+"\"")
 
+    #按钮选择目录
     def on_LoadFile2(self):
         dir_path = QFileDialog.getExistingDirectory(self, "choose directory", "C:")
         dir_path2 = dir_path.replace('/', '\\')
         self.lineEdit_2.setText(dir_path2)
 
+    # 添加tableWidget表格行
     def on_add(self):
         print("add")
         rowcount = self.tableWidget.rowCount()
         print(rowcount)
         self.tableWidget.setRowCount(rowcount+1)
 
-
+    # 删除选择tableWidget表格行
     def on_delete(self):
         print("delete")
         row_select = self.tableWidget.selectedItems()
@@ -49,6 +52,7 @@ class MainCode(QMainWindow, MayaBatRender.Ui_Form):
             row = row_select_child.row()
             self.tableWidget.removeRow(row)
 
+    # 把tableWidget表格内容保存为txt
     def on_save(self):
         print ("on_save")
         filesave = QFileDialog.getSaveFileName(self, '文件另存为', 'C:', 'TXT (*.txt)')
@@ -62,6 +66,7 @@ class MainCode(QMainWindow, MayaBatRender.Ui_Form):
             f.write(set_text)
             print(set_text)
 
+    # 从已经保存的txt读取到tableWidget表格中
     def on_open(self):
         print("on_open")
         txtstr = ""
@@ -106,6 +111,7 @@ class MainCode(QMainWindow, MayaBatRender.Ui_Form):
 
                 col = col + 1
 
+    # 将所有需要信息保存为bat，并执行该bat文件
     def on_run(self):
         print("run")
         filename = QFileDialog.getSaveFileName(self, '文件另存为', 'C:', 'BAT (*.bat)')
